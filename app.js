@@ -34,7 +34,17 @@ app.use(express.urlencoded({ extended: true }));
 // POST route for handling form submission
 app.post('/contact', (request, response) => {
   console.log('Contact form submission:', request.body);
-  response.send('Thank you for your message. We will be in touch soon.');
+  // Read the contents of emailsub.html file
+  fs.readFile('./views/emailsub.html', 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading emailsub.html:', err);
+      // Send an error response if unable to read the file
+      response.status(500).send('Internal Server Error');
+      return;
+    }
+    // Send the contents of emailsub.html as the response
+    response.send(data);
+  });
 });
 
 // Route for handling 404 errors

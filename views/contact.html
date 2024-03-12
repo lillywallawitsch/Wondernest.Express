@@ -24,7 +24,7 @@
       <nav>
       <ul>
         <a href="./index.html"><button>Home</button></a>
-        <a href="./about.html"><button>Contact</button></a>
+        <a href="./about.html"><button>About</button></a>
         </ul>
     </nav>
    </div>
@@ -46,12 +46,21 @@
         </div>
     </section>
 <section class="container">
-    <form id="emailForm">
-        <label for="email">Subscribe to our newsletter:</label>
-        <input type="email" id="email" name="email" required>
-        <input type="submit" value="Subscribe">
+    <form id="emailForm" action="/contact" method="POST">
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" placeholder="Enter your message here" required></textarea>
+        </div>
+        <div>
+            <input type="submit" value="Subscribe">
+        </div>
     </form>
 </section>
+
  
   <footer>
     <div> 
