@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+ <!-- Basic Meta -->
+    <meta charset="UTF-8">
+    <meta name="author" content="Lilly Wallawitsch">
+    <meta name="description" content="Wondernest: Host, attend, and organize small in-person events focused on genuine connection, enhancing social lives in big cities. ">
+    <title>Wondernest</title>
+
+    <!--Mobile Specific-->
+    <meta name="viewport" content="with=device-width, initial-scale=1">
+   
+    <!--css-->
+    <link rel="stylesheet" href="/views/style.css">
+
+    
+    <!--Favicon-->
+    <link rel="icon" href="favicon_io (1)/android-chrome-192x192.png type="image/ico" sizes="16x16">
+</head>
+    </head>
+<body>
+<header>
+   <div class="container">
+     <h1>Contact</h1>
+     <nav>
+      <ul>
+        <a href="/views/index.html"><button>Home</button></a>
+        <a href="/views/about.html""><button>About</button></a>
+        
+      </ul>
+    </nav>
+   </div>
+  </header>
+
+  <main>
+    <section class="container">
+        <h2> Contact us</h2>
+        <div class="contact-list">
+         <div class="contact-item">
+            <span class="icon">&#x1F4E7;</span> <!-- Email icon -->
+            <span>Email:</span> lilly.wallawitsch@code.berlin
+        </div>
+
+        <div class="contact-item">
+            <span class="icon">&#x1F4AC;</span> <!-- Slack icon -->
+            <span>Telegram:</span> lilly.wallawitsch@gmai.com
+         </div>
+        </div>
+    </section>
+    <section class="container">
+        <form id="emailForm" action="submit_email.php" method="post">
+            <label for="email">Subscribe to our newsletter:</label>
+            <input type="email" id="email" name="email" required>
+            <input type="submit" value="Subscribe">
+        </form>
+
+        <form action="/contact" method="POST">
+            <input type="text" name="name" />
+            <input type="email" name="email" />
+            <input type="tel" name="phone" />
+            <textarea name="message"></textarea>
+
+            <button>Send</button>
+        </form>
+    </section>
+  </main>
+ 
+  <footer>
+    <div> 
+    <p>&copy; 2024 Wondernest.net. All rights reserved.</p>
+    </div>
+  </footer>       
+    </body>
+</html>
