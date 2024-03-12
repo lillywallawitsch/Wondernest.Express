@@ -31,9 +31,11 @@ app.use(express.static('views'));
 // Parse URL-encoded bodies for form submission
 app.use(express.urlencoded({ extended: true }));
 
-// POST route for handling form submission
 app.post('/contact', (request, response) => {
-  console.log('Contact form submission:', request.body);
+  // Log the submitted email and message
+  console.log('Submitted email:', request.body.email);
+  console.log('Submitted message:', request.body.message);
+  
   // Read the contents of emailsub.html file
   fs.readFile('./views/emailsub.html', 'utf8', (err, data) => {
     if (err) {
