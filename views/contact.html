@@ -22,13 +22,6 @@
 <header>
    <div class="container">
      <h1>Contact</h1>
-     <nav>
-      <ul>
-        <a href="/views/index.html"><button>Home</button></a>
-        <a href="/views/about.html""><button>About</button></a>
-        
-      </ul>
-    </nav>
    </div>
   </header>
 
@@ -47,23 +40,13 @@
          </div>
         </div>
     </section>
-    <section class="container">
-        <form id="emailForm" action="submit_email.php" method="post">
-            <label for="email">Subscribe to our newsletter:</label>
-            <input type="email" id="email" name="email" required>
-            <input type="submit" value="Subscribe">
-        </form>
-
-        <form action="/contact" method="POST">
-            <input type="text" name="name" />
-            <input type="email" name="email" />
-            <input type="tel" name="phone" />
-            <textarea name="message"></textarea>
-
-            <button>Send</button>
-        </form>
-    </section>
-  </main>
+<section class="container">
+    <form id="emailForm">
+        <label for="email">Subscribe to our newsletter:</label>
+        <input type="email" id="email" name="email" required>
+        <input type="submit" value="Subscribe">
+    </form>
+</section>
  
   <footer>
     <div> 
