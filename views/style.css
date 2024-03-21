@@ -4,6 +4,9 @@ body {
   color: white;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 header {
@@ -33,9 +36,9 @@ button {
 }
 
 button:hover {
-  background-color: b);
+  background-color: #8f8ecf; /* New background color on hover */
+  transition: background-color 0.3s ease; /* Add transition effect */
 }
-
 main {
   display: flex;
   justify-content: space-between;
@@ -46,11 +49,14 @@ main {
   flex-basis: calc(50% - 20px);
   background-color: #4A7279;
   padding: 20px;
-  border-radius: 20px;
+  border-radius: 30px;
   margin-left: 10px;
   margin-right: 10px;
+  margin-top: 10px; /* Add margin-top */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+
 .image-container {
   display: flex;
   justify-content: center;
@@ -89,9 +95,6 @@ main {
   height: 20px;
   margin-right: 5px;
 }
-.container {
-    margin-top: 20px;
-}
 
 #emailForm {
     display: flex;
@@ -115,19 +118,21 @@ main {
 }
 
 #emailForm input[type="submit"] {
-    width: 100%; 
-    padding: 10px;
-    border: none;
-    background-color: #B5B4F1; 
-    color: #fff;
-    border-radius: 4px;
-    cursor: pointer;
+  font-size: 18px;
+  background-color: #B5B4F1;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin-bottom: 2px;
+  margin-top: 2px;
+  transition: background-color 0.3s ease;
+  font-weight: bold; 
 }
 
 #emailForm input[type="submit"]:hover {
-    background-color: #9d9ce4;
+    background-color: #8f8ecf; /* Same background color as other buttons on hover */
+    transition: background-color 0.3s ease; /* Add transition effect */
 }
-
 
 
 footer {
@@ -136,25 +141,5 @@ footer {
   text-align: center;
   padding: 20px;
   border-top: 1px solid #ccc;
+  margin-top: auto; /* Push the footer to the bottom of the page */
 }
-
-@media (max-width: 768px) {
-  main {
-    flex-direction: column;
-  }
-
-  .container {
-    flex-basis: 100%;
-    margin-bottom: 20px;
-  }
-
-  .image-container {
-    flex-direction: column;
-  }
-
-  .image-container img {
-    width: 300px;
-    height: 300px;
-  }
-}
-
