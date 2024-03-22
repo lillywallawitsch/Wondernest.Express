@@ -32,6 +32,23 @@ app.get('/:page', (req, res) => {
   });
 });
 
+// Route to handle form submission for the contact page
+app.post('/contact', (request, response) => {
+  // Log submitted email and message
+  console.log('Submitted email:', request.body.email);
+  console.log('Submitted message:', request.body.message);
+  
+  // Read and send the emailsub.html response
+  fs.readFile('./views/emailsub.html', 'utf8', (err, data) => {
+    if (err) {
+      // Log error and send 500 status for server error
+      console.error('Error reading emailsub.html:', err);
+      response.status(500).send('Internal Server Error');
+      return;
+    }
+    response.send(data);
+  });
+});
 
 // Define the port for the server to listen on
 const PORT = process.env.PORT || 3000;
