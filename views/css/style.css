@@ -4,9 +4,6 @@ body {
   color: white;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
 }
 
 header {
@@ -16,11 +13,11 @@ header {
 
 h1 {
     font-family: 'Times New Roman', Times, serif;
-    font-size: 6vw; 
+    font-size: 6vw; /* Adjust the font size based on viewport width */
     color: white;
     text-align: center;
     letter-spacing: 2px;
-    margin-top: 2vw; 
+    margin-top: 2vw; /* Adjust margin based on viewport width */
 }
 
 button {
@@ -32,13 +29,13 @@ button {
   margin-bottom: 2px;
   margin-top: 2px;
   transition: background-color 0.3s ease;
-  font-weight: bold; 
+  font-weight: bold; /* Set font weight to bold */
 }
 
 button:hover {
-  background-color: #8f8ecf; /* New background color on hover */
-  transition: background-color 0.3s ease; /* Add transition effect */
+  background-color: b;
 }
+
 main {
   display: flex;
   justify-content: space-between;
@@ -49,14 +46,11 @@ main {
   flex-basis: calc(50% - 20px);
   background-color: #4A7279;
   padding: 20px;
-  border-radius: 30px;
+  border-radius: 20px;
   margin-left: 10px;
   margin-right: 10px;
-  margin-top: 10px; /* Add margin-top */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
-
 .image-container {
   display: flex;
   justify-content: center;
@@ -74,11 +68,11 @@ main {
   margin: 0 10px;
   padding: 0 10px;
   margin-bottom: 20px;
-  transition: transform 0.3s ease; 
+  transition: transform 0.3s ease; /* Add transition for smooth scaling */
 }
 
 .image-container img:hover {
-  transform: scale(1.2); 
+  transform: scale(1.2); /* Scale the image to 110% on hover */
 }
 
 .contact-list {
@@ -97,18 +91,16 @@ main {
 }
 
 #emailForm {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    margin-top: 20px;
 }
 
 #emailForm label {
+    display: block;
     font-size: 16px;
     margin-bottom: 5px;
 }
 
-#emailForm input[type="email"],
-#emailForm textarea {
+#emailForm input[type="email"] {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
@@ -118,20 +110,17 @@ main {
 }
 
 #emailForm input[type="submit"] {
-  font-size: 18px;
-  background-color: #B5B4F1;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 10px;
-  margin-bottom: 2px;
-  margin-top: 2px;
-  transition: background-color 0.3s ease;
-  font-weight: bold; 
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #B5B4F1; /* Fallback color */
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 #emailForm input[type="submit"]:hover {
-    background-color: #8f8ecf; /* Same background color as other buttons on hover */
-    transition: background-color 0.3s ease; /* Add transition effect */
+    background-color: #9d9ce4;
 }
 
 
@@ -141,5 +130,25 @@ footer {
   text-align: center;
   padding: 20px;
   border-top: 1px solid #ccc;
-  margin-top: auto; /* Push the footer to the bottom of the page */
 }
+
+@media (max-width: 768px) {
+  main {
+    flex-direction: column;
+  }
+
+  .container {
+    flex-basis: 100%;
+    margin-bottom: 20px;
+  }
+
+  .image-container {
+    flex-direction: column;
+  }
+
+  .image-container img {
+    width: 300px;
+    height: 300px;
+  }
+}
+

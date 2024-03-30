@@ -11,23 +11,23 @@
     <meta name="viewport" content="with=device-width, initial-scale=1">
 
     <!--css-->
-    <link rel="stylesheet" href="./style.css">
-
+    <link rel="stylesheet" href="/css/style.css">
 
     <!--Favicon-->
-    <link rel="icon" href="./favicon_io (1)/android-chrome-192x192.png" type="image/ico" sizes="16x16">
+    <link rel="icon" href="/favicon_io (1)/android-chrome-192x192.png"type="image/ico" sizes="16x16">
 </head>
 
 <body>
 
 <header>
-   <div class="container">
-     <h1>Wondernest</h1>
-        <ul>
-        <a href="./contact.html"><button>Contact</button></a>
-        <a href="./about.html"><button>About</button></a>
-        </ul>
-   </div>
+<div class="container">
+  <h1>Wondernest</h1>
+  <ul>
+    <a href="/pages/contact.html"><button>Contact</button></a>
+    <a href="/pages/about.html"><button>About</button></a>
+  </ul>
+</div>
+
   </header>
   <main>
     <section class="container">
@@ -44,10 +44,30 @@
         <h2> What we've done so far</h2>
         <p> Our Users as well as our Team has hosted plenty diverent types of get togethers all over Europe.</p>
     </section>
+  
+  </main>  
+  <main>
+<!-- Iterate over the 'events' array -->
+  <section class="container">
+    <h2>Events</h1>
+    <ul>
+    <a href="/events/new"><success-button>New Event</success-button></a>
+    <a href="/events/new"><button>New Event</button></a>
+    </ul>
+
+    <% events.forEach(event => { %>
+    <div>
+      <%= event.title %>
+    </div>
+    <% }) %>
+  </section>
   </main>
+
+
+
  <div class="image-container">
     <img src="./Images/IMG_1 copy.jpg">
-    <!-- <img src="./Images/PXL_2 copy.jpg"> -->
+    <img src="./Images/PXL_2 copy.jpg">
     <img src="./Images/PXL_3 copy.jpg">
     <img src="./Images/PXL_4jpeg copy.jpeg">
   </div>
