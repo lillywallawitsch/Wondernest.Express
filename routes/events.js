@@ -48,10 +48,21 @@ router.post('/', async (req, res) => {
 });
 
 
+// In your routes/events.js file
+
 router.delete('/:id', async (req, res) => {
-    await Event.findByIdAndDelete(req.params.id)
-    res.redirect('/')
-})
+    try {
+        // Find the event by id and delete it
+        await Event.findByIdAndDelete(req.params.id);
+        // Redirect to the events page or any other page as needed
+        res.redirect('/events');
+    } catch (error) {
+        // Handle errors
+        console.error(error);
+        res.redirect('/');
+    }
+});
+
 
 
 export default router;
