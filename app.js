@@ -7,7 +7,7 @@ import { logger } from './middlewares/logger.js';
 import eventRouter from './routes/events.js';
 import mongoose from 'mongoose';
 import { Event } from './models/event.js';
-import methodOverride from 'method-override'; // Import method-override using ES6 syntax
+import methodOverride from 'method-override'; 
 
 mongoose.connect('mongodb://localhost/event');
 

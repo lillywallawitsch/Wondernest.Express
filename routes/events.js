@@ -8,19 +8,16 @@ router.get('/new', (req, res) => {
     res.render('events/new', { event: new Event() });
 });
 
-// Route to show the details of a specific event
+
 router.get('/:slug', async (req, res) => {
     try {
         // Find the event by slug
         const event = await Event.findOne({ slug: req.params.slug });
         if (event == null) {
-            // If event not found, redirect to index or handle the error
             return res.redirect('/');
         }
-        // Render the event details page
         res.render('events/show', { event });
     } catch (error) {
-        // Handle any errors
         console.error(error);
         res.redirect('/');
     }
