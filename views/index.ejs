@@ -58,10 +58,11 @@
       <div class="card-subtitle"><%= event.date %></div>
       <div class="card-text"><%= event.description %></div>
       </div>
-      <a href="./events/ <%=event.slug %>"><button class="button.dark">Read more</button></a>
+      <a href="/events/<%= event.slug %>"><button class="button.dark">Read more</button></a>
       <form action="/events/<%= event.id %>?_method=DELETE" method="POST" class="d-inline">
-        <button type="submit">Delete</button>
-      </form>
+      <input type="hidden" name="_method" value="DELETE">
+      <button type="submit">Delete</button>
+</form>
     </div>
     <% }) %>
   </div>

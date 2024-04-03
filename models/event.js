@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import slugify from 'slugify';
 
-
+//create Model
 const eventSchema = new mongoose.Schema({
     title: {
         type: String,
