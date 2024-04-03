@@ -8,14 +8,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Wondernest</title>
 
-    <!--Mobile Specific-->
+   <!--Mobile Specific-->
     <meta name="viewport" content="with=device-width, initial-scale=1">
 
-    <!--css-->
-    <link rel="stylesheet" href="/style.css">
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="/css/style.css">
 
-    <!--Favicon-->
-    <link rel="icon" href="./favicon_io (1)/android-chrome-192x192.png"type="image/ico" sizes="16x16">
+    <!-- Link to your favicon -->
+    <link rel="icon" href="/favicon_io (1)/android-chrome-192x192.png" type="image/ico" sizes="16x16">
+</head>
+<body>
 </head>
 
 <body>
@@ -49,7 +51,7 @@
   </main>  
 
   <div class="image-container">
-    <img src="./Images/IMG_1 copy.jpg">
+    <img src="/Images/IMG_1 copy.jpg">
     <img src="./Images/PXL_2 copy.jpg">
     <img src="./Images/PXL_3 copy.jpg">
     <img src="./Images/PXL_4jpeg copy.jpeg">
@@ -63,10 +65,10 @@
     <div class="card">
       <div class="card-body">
       <h4 class="card-title"><%= event.title %></h4>
-      <div class="card-subtitle"><%= event.date %></div>
+      <div class="card-subtitle"><%= event.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) %></div>
       <div class="card-text"><%= event.description %></div>
       </div>
-      <a href="/events/<%= event.slug %>"><button class="button.dark">Read more</button></a>
+      <a href="/events/<%= event.slug %>"><button">Read more</button></a>
       <form action="/events/<%= event.id %>?_method=DELETE" method="POST" class="d-inline">
       <button type="submit">Delete</button>
 </form>
