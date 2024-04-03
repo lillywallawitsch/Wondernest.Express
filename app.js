@@ -21,25 +21,25 @@ app.use(express.static('views'));
 
 // Routes
 app.get('/', async (req, res) => {
-  const events = await Event.find().sort({ date: 'desc' })
-  res.render('index', { events });
+    const events = await Event.find().sort({ date: 'desc' })
+    res.render('index', { events });
 });
 
 app.get('/contact', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'pages', 'contact.html'));
+    res.sendFile(path.join(__dirname, 'views', 'pages', 'contact.html'));
 });
 
 // Handle form submission
 app.post('/contact', (req, res) => {
-  console.log('Submitted email:', req.body.email);
-  console.log('Submitted message:', req.body.message);
-  // Perform any necessary actions with the form data
-  // Redirect to emailsub.html after form submission
-  res.redirect('/pages/emailsub.html');
+    console.log('Submitted email:', req.body.email);
+    console.log('Submitted message:', req.body.message);
+    // Perform any necessary actions with the form data
+    // Redirect to emailsub.html after form submission
+    res.redirect('/pages/emailsub.html');
 });
 
 app.get('/about', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'pages', 'about.html'));
+    res.sendFile(path.join(__dirname, 'views', 'pages', 'about.html'));
 });
 
 app.get('/events/new', (req, res) => {
@@ -82,6 +82,34 @@ app.post('/events', async (req, res) => {
     }
 });
 
+// Edit route
+app.get('/events/:slug/edit', async (req, res) => {
+    try {
+        const event = await Event.findOne({ slug: req.params.slug });
+        if (!event) {
+            return res.redirect('/');
+        }
+        res.render('events/edit', { event });
+    } catch (error) {
+        console.error(error);
+        res.redirect('/');
+    }
+});
+
+// Update route
+app.post('/events/:slug', async (req, res) => {
+    try {
+        const { title, description, location, date, host } = req.body;
+        await Event.findOneAndUpdate({ slug: req.params.slug }, { title, description, location, date, host });
+        res.redirect(`/events/${req.params.slug}`);
+    } catch (error) {
+        console.error(error);
+        res.redirect('/');
+    }
+});
+
+
+// Delete route
 app.delete('/events/:id', async (req, res) => {
     console.log('delete ID');
     await Event.findByIdAndDelete(req.params.id);
@@ -90,5 +118,5 @@ app.delete('/events/:id', async (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}/`);
+    console.log(`Server running at http://localhost:${PORT}/`);
 });

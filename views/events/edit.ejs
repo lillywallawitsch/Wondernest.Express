@@ -1,0 +1,49 @@
+<!-- edit.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic Meta -->
+    <meta charset="UTF-8">
+    <title>Edit Event</title>
+
+    <!--Mobile Specific-->
+    <meta name="viewport" content="with=device-width, initial-scale=1">
+
+    <!--css-->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!--Favicon-->
+    <link rel="icon" href="../favicon_io (1)/android-chrome-192x192.png" sizes="16x16">
+</head>
+<body>
+    <div class="container">
+    <h1>Edit Event</h1>
+    <form action="/events/<%= event.slug %>" method="POST">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input required value="<%= event.title %>" type="text" name="title" id="title" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea name="description" id="description" class="form-control"><%= event.description %></textarea>
+        </div>
+        <div class="form-group">
+            <label for="location">Location</label>
+            <input required type="text" name="location" id="location" class="form-control" value="<%= event.location %>">
+        </div>
+        <div class="form-group">
+            <label for="date">Date</label>
+            <input required type="date" name="date" id="date" class="form-control" value="<%= event.date.toISOString().substr(0,10) %>">
+        </div>
+        <div class="form-group">
+            <label for="host">Host</label>
+            <input type="text" name="host" id="host" class="form-control" value="<%= event.host %>">
+        </div>
+    
+    <!-- Add similar form fields for description, location, date, host -->
+    <button type="submit">Save</button>
+</form>
+    </form>
+    </div>
+</body>
+</html>
