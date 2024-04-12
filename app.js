@@ -6,8 +6,9 @@ import { body, validationResult } from 'express-validator';
 import { logger } from './middlewares/logger.js';
 import methodOverride from 'method-override';
 import { Event } from './models/event.js';
+import 'dotenv/config';
 
-mongoose.connect('mongodb://localhost/event');
+mongoose.connect(process.env.MONGODB_URI);
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -158,9 +159,9 @@ app.use((err, req, res, next) => {
     res.status(500).send('Something broke!');
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}/`);
+
+app.listen(process.env.PORT, () => {
+    console.log(`Server running at http://localhost:${process.env.PORT}/`);
 });
 
 // Close the MongoDB connection after execution
