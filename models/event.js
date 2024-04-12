@@ -5,28 +5,34 @@ import slugify from 'slugify';
 const eventSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: true
+        required: true,
     },
+
     description: {
         type: String,
-        required: true
+        required: true,
     },
+
     location: {
         type: String,
-        required: true
+        required: true, 
     },
+
     host: {
         type: String,
-        required: true
+        required: true,
     },
+
     date: {
         type: Date,
         required: true
     },
+
     createdAt: {
         type: Date,
         default: Date.now
     },
+    
     slug: {
         type: String,
         required: true,

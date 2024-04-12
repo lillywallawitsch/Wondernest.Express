@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import mongoose from 'mongoose';
+import { body, validationResult } from 'express-validator';
 import { logger } from './middlewares/logger.js';
 import methodOverride from 'method-override';
 import { Event } from './models/event.js';
@@ -21,8 +22,13 @@ app.use(express.static('views'));
 
 // Routes
 app.get('/', async (req, res) => {
-    const events = await Event.find().sort({ date: 'desc' })
-    res.render('index', { events });
+    try {
+        const events = await Event.find().sort({ date: 'desc' });
+        res.render('index', { events });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
 });
 
 app.get('/contact', (req, res) => {
@@ -42,39 +48,60 @@ app.get('/about', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'pages', 'about.html'));
 });
 
+// Validation and sanitization middleware for the event creation route
+const validateEvent = [
+    body('title').trim().notEmpty().escape(),
+    body('description').trim().notEmpty().escape(),
+    body('location').trim().notEmpty().escape(),
+    body('date').toDate(),
+    body('host').trim().notEmpty().escape(),
+];
+
+// Handle rendering the new event form
 app.get('/events/new', (req, res) => {
-    res.render('events/new', { event: new Event() });
+    // Create a new event object with default values
+    const newEvent = new Event({
+        title: '',
+        description: '',
+        location: '',
+        date: new Date(),
+        host: ''
+    });
+    // Render the new event form with the new event object
+    res.render('events/new', { event: newEvent });
 });
 
 app.get('/events/:slug', async (req, res) => {
     try {
-        // Find the event by slug
         const event = await Event.findOne({ slug: req.params.slug });
-        if (event == null) {
+        if (!event) {
             return res.redirect('/');
         }
         res.render('events/show', { event });
     } catch (error) {
         console.error(error);
-        res.redirect('/');
+        res.status(500).send('Internal Server Error');
     }
 });
 
-app.post('/events', async (req, res) => {
-    const inputDate = new Date(req.body.date);
-    // Create a new event object
-    let event = new Event({
-        title: req.body.title,
-        description: req.body.description,
-        location: req.body.location,
-        date: inputDate,
-        host: req.body.host,
-    });
+// Handle form submission
+app.post('/events', validateEvent, async (req, res) => {
+    // Check for validation errors
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
 
     try {
-        // Save the event to the database
+        const inputDate = new Date(req.body.date);
+        let event = new Event({
+            title: req.body.title,
+            description: req.body.description,
+            location: req.body.location,
+            date: inputDate,
+            host: req.body.host,
+        });
         event = await event.save();
-        // Redirect to the details page of the newly created event
         res.redirect(`/events/${event.slug}`);
     } catch (error) {
         console.error(error);
@@ -92,7 +119,7 @@ app.get('/events/:slug/edit', async (req, res) => {
         res.render('events/edit', { event });
     } catch (error) {
         console.error(error);
-        res.redirect('/');
+        res.status(500).send('Internal Server Error');
     }
 });
 
@@ -104,19 +131,41 @@ app.post('/events/:slug', async (req, res) => {
         res.redirect(`/events/${req.params.slug}`);
     } catch (error) {
         console.error(error);
-        res.redirect('/');
+        res.status(500).send('Internal Server Error');
     }
 });
 
-
 // Delete route
 app.delete('/events/:id', async (req, res) => {
-    console.log('delete ID');
-    await Event.findByIdAndDelete(req.params.id);
-    res.redirect('/');
+    try {
+        console.log('delete ID');
+        await Event.findByIdAndDelete(req.params.id);
+        res.redirect('/');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+// Handle 404 responses
+app.use((req, res, next) => {
+    res.status(404).sendFile(path.join(__dirname, 'views', 'pages', '404.html'));
+});
+
+// Error handler
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
 });
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}/`);
+});
+
+// Close the MongoDB connection after execution
+process.on('SIGINT', async () => {
+    await mongoose.connection.close();
+    console.log('MongoDB connection closed.');
+    process.exit(0);
 });
