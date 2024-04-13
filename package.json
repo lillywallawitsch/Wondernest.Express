@@ -5,7 +5,9 @@
   "type": "module",
   "update.mode": "none",
   "scripts": {
-    "devStart": "nodemon app.js"
+    "devStart": "nodemon app.js",
+    "build": "yarn",
+    "start": "node app.js"
   },
   "author": "",
   "license": "ISC",
