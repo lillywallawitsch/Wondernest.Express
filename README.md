@@ -15,6 +15,14 @@ The Wondernest website serves as a platform for hosting, organizing, and attendi
 - Event Page: Users can create, edit and delete events.
 - Responsive Design: The website is designed to be accessible and user-friendly across various devices, including desktops, tablets, and mobile phones.
 
+## Running the Wondernest Website Locally
+- set up both Node.js and MongoDB
+- Clone the Repository
+- Install Dependencies ( npm install )
+- Set Up MongoDB ( mongod )
+- Initialize the Database ( mongoimport --db event --collection events --file path/to/your/data.json )
+- Start the Application ( npm run devStart )
+
 ---
 
 By Lilly Wallawitsch
