@@ -6,9 +6,9 @@ import { body, validationResult } from 'express-validator';
 import { logger } from './middlewares/logger.js';
 import methodOverride from 'method-override';
 import { Event } from './models/event.js';
-import 'dotenv/config';
+import dotenv from 'dotenv';
 
-mongoose.connect(process.env.MONGODB_URI);
+dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -20,6 +20,18 @@ app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
 app.set('view engine', 'ejs');
 app.use(express.static('views'));
+
+// Database connection
+console.log("Connecting to MongoDB...")
+mongoose
+    .connect(process.env.MONGODB_URI)
+    .then(() => {
+        console.log("Connected to MongoDB successfully");
+    })
+    .catch((err) => {
+        console.error("Failed to connect to MongoDB", err);
+        process.exit(1); // Exit the process with a non-zero status code
+    });
 
 // Routes
 app.get('/', async (req, res) => {
