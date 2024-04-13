@@ -22,9 +22,9 @@ app.set('view engine', 'ejs');
 app.use(express.static('views'));
 
 // Database connection
-console.log("Connecting to MongoDB...")
+console.log("Connecting to MongoDB...");
 mongoose
-    .connect(process.env.MONGODB_URI)
+    .connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log("Connected to MongoDB successfully");
     })
