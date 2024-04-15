@@ -61,7 +61,7 @@ app.get('/about', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'pages', 'about.html'));
 });
 
-// Validation and sanitization middleware for the event creation route
+// Validation middleware for the event creation route
 const validateEvent = [
     body('title').trim().notEmpty().escape(),
     body('description').trim().notEmpty().escape(),
@@ -165,20 +165,28 @@ app.use((req, res, next) => {
     res.status(404).sendFile(path.join(__dirname, 'views', 'pages', '404.html'));
 });
 
-// Error handler
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
-});
-
-
 app.listen(process.env.PORT, () => {
     console.log(`Server running at http://localhost:${process.env.PORT}/`);
 });
 
-// Close the MongoDB connection after execution
+// Close MongoDB connection after execution
 process.on('SIGINT', async () => {
-    await mongoose.connection.close();
-    console.log('MongoDB connection closed.');
-    process.exit(0);
+    try {
+        await mongoose.connection.close();
+        console.log('MongoDB connection closed.');
+    } catch (error) {
+        console.error('Error closing MongoDB connection:', error);
+    } finally {
+        process.exit(0);
+    }
+});
+
+// Error handler
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+    mongoose.connection.close(() => {
+        console.log('MongoDB connection closed due to critical error.');
+        process.exit(1); 
+    });
 });
